@@ -44,15 +44,15 @@ export default function ContactCTA() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm text-gray-600 dark:text-gray-300">Name</label>
-                  <input required className="mt-1 w-full rounded-md border border-gray-200 dark:border-white/10 bg-transparent px-3 py-2 outline-none focus:ring-2" style={{ --ring: BRAND_BLUE }} />
+                  <input required className="mt-1 w-full rounded-md border border-gray-200 dark:border-white/10 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-[#0060B9]" />
                 </div>
                 <div>
                   <label className="text-sm text-gray-600 dark:text-gray-300">Email</label>
-                  <input type="email" required className="mt-1 w-full rounded-md border border-gray-200 dark:border-white/10 bg-transparent px-3 py-2 outline-none focus:ring-2" />
+                  <input type="email" required className="mt-1 w-full rounded-md border border-gray-200 dark:border-white/10 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-[#0060B9]" />
                 </div>
                 <div className="sm:col-span-2">
                   <label className="text-sm text-gray-600 dark:text-gray-300">Message</label>
-                  <textarea rows={4} required className="mt-1 w-full rounded-md border border-gray-200 dark:border-white/10 bg-transparent px-3 py-2 outline-none focus:ring-2" />
+                  <textarea rows={4} required className="mt-1 w-full rounded-md border border-gray-200 dark:border-white/10 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-[#0060B9]" />
                 </div>
               </div>
               <button type="submit" className="mt-6 w-full rounded-full px-6 py-3 font-semibold text-white" style={{ backgroundColor: BRAND_BLUE }}>
