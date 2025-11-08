@@ -37,7 +37,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Brand */}
-          <a href="#" className="flex items-center gap-3">
+          <a href="#/" className="flex items-center gap-3">
             <div className="relative">
               <div className="h-9 w-9 rounded-full border-2" style={{ borderColor: BRAND_BLUE }} />
               <div className="absolute inset-0 rounded-full animate-ping opacity-20" style={{ backgroundColor: BRAND_BLUE }} />
@@ -50,10 +50,9 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <NavLink href="#about">About</NavLink>
-            <NavLink href="#why">Why Us</NavLink>
-            <NavLink href="#products">Products</NavLink>
-            <NavLink href="#contact">Contact</NavLink>
+            <NavLink href="#/">Home</NavLink>
+            <NavLink href="#/products">Products</NavLink>
+            <NavLink href="#/contact">Contact</NavLink>
             <a href="tel:+923000000000" className="hidden lg:flex items-center gap-2 text-sm font-semibold" style={{ color: BRAND_BLUE }}>
               <Phone size={16} /> +92 300 0000000
             </a>
@@ -89,10 +88,9 @@ export default function Navbar() {
         {open && (
           <div className="md:hidden pb-4 animate-in slide-in-from-top-2 fade-in-0">
             <div className="flex flex-col gap-4 pt-2">
-              <NavLink href="#about">About</NavLink>
-              <NavLink href="#why">Why Us</NavLink>
-              <NavLink href="#products">Products</NavLink>
-              <NavLink href="#contact">Contact</NavLink>
+              <NavLink href="#/">Home</NavLink>
+              <NavLink href="#/products">Products</NavLink>
+              <NavLink href="#/contact">Contact</NavLink>
               <a href="mailto:info@friendsthermopole.com" className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
                 <Mail size={16} /> info@friendsthermopole.com
               </a>

@@ -1,12 +1,75 @@
+import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
-import Hero3D from './components/Hero3D';
-import WhyChooseUs from './components/WhyChooseUs';
+import Background3D from './components/Background3D';
 import ProductsPreview from './components/ProductsPreview';
 import ContactCTA from './components/ContactCTA';
 
+function SectionLayout({ children }) {
+  return (
+    <div className="relative">
+      {/* Per-page soft backdrop to ensure legibility over moving background */}
+      <div className="pointer-events-none absolute inset-0 bg-white/60 dark:bg-black/60" aria-hidden />
+      <div className="relative">{children}</div>
+    </div>
+  );
+}
+
+function HomePage() {
+  return (
+    <>
+      {/* Hero content */}
+      <section className="pt-20 min-h-[70vh] flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+              Friendship Is A Unique Relation —
+              <span className="block text-[#0060B9]">Friends Thermopole Industry</span>
+            </h1>
+            <p className="mt-4 text-lg text-gray-700 dark:text-gray-300 max-w-xl">
+              Pakistan’s leading thermopole manufacturer. Precision engineered insulation, packaging and architectural solutions with enterprise-grade quality.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row gap-4">
+              <a
+                href="#/products"
+                className="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold text-white shadow-lg shadow-blue-500/20 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                style={{ backgroundColor: '#0060B9' }}
+              >
+                Explore Products
+              </a>
+              <a
+                href="#/contact"
+                className="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold border"
+                style={{ borderColor: '#0060B9', color: '#0060B9' }}
+              >
+                Get a Quote
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function ProductsPage() {
+  return (
+    <SectionLayout>
+      <ProductsPreview />
+    </SectionLayout>
+  );
+}
+
+function ContactPage() {
+  return (
+    <SectionLayout>
+      <ContactCTA />
+    </SectionLayout>
+  );
+}
+
 function Footer() {
   return (
-    <footer className="py-10 border-t border-gray-200 dark:border-white/10 bg-white dark:bg-black">
+    <footer className="py-10 border-t border-gray-200 dark:border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm text-gray-600 dark:text-gray-300">© {new Date().getFullYear()} Friends Thermopole Industry. All rights reserved.</p>
         <div className="text-sm text-gray-600 dark:text-gray-300">Made with precision in Pakistan.</div>
@@ -16,48 +79,31 @@ function Footer() {
 }
 
 export default function App() {
+  const getRoute = () => {
+    const h = typeof window !== 'undefined' ? window.location.hash : '#/'
+    const r = h.replace('#', '') || '/'
+    return r
+  }
+
+  const [route, setRoute] = useState(getRoute());
+
+  useEffect(() => {
+    const onHashChange = () => setRoute(getRoute());
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
+  let Page = HomePage;
+  if (route.startsWith('/products')) Page = ProductsPage;
+  if (route.startsWith('/contact')) Page = ContactPage;
+
   return (
     <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
+      <Background3D />
       <Navbar />
-      <Hero3D />
-
-      {/* About section */}
-      <section id="about" className="py-20 bg-gray-50 dark:bg-neutral-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          <div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">About Us</h2>
-            <p className="mt-4 text-gray-700 dark:text-gray-300">Friends Thermopole Industry is a leading Pakistani manufacturer of EPS (thermopole) solutions for construction, packaging and design. We combine modern manufacturing with rigorous QA to deliver reliable performance at scale.</p>
-            <ul className="mt-6 space-y-2 text-gray-800 dark:text-gray-200">
-              <li>• Nationwide delivery and enterprise SLA</li>
-              <li>• Custom densities, sizes and branding</li>
-              <li>• Engineering support for thermal calculations</li>
-            </ul>
-          </div>
-          <div className="relative">
-            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#0060B9]/20 to-[#E60000]/20 blur-2xl" aria-hidden />
-            <div className="relative rounded-3xl border border-gray-200 dark:border-white/10 p-6 shadow-xl bg-white dark:bg-neutral-900">
-              <div className="grid grid-cols-3 gap-6 text-center">
-                <div>
-                  <p className="text-3xl font-extrabold">15+</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">Years</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-extrabold">1M+</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">Units/year</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-extrabold">99.9%</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">On-time</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <WhyChooseUs />
-      <ProductsPreview />
-      <ContactCTA />
+      <main className="relative">
+        <Page />
+      </main>
       <Footer />
     </div>
   );
